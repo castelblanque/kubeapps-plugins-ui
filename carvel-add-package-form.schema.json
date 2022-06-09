@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "customDetails": {
+      "type": "object",
+      "properties": {
+        "ociRepositories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "default": ""
+          }
+        }
+      }
+    }
+  }
+}

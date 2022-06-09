@@ -1,0 +1,9 @@
+{
+  "ui:order": ["name", "customDetails", "*", "auth"],
+  "customDetails": {
+    "ui:title": "Custom details",
+    "ociRepositories": {
+      "ui:title": "OCI repositories"
+    }
+  }
+}
