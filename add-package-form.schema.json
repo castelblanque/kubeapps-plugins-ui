@@ -1,0 +1,162 @@
+{
+    "title": "Add package repository",
+    "description": "New package repository request",
+    "type": "object",
+    "required": ["name", "url", "type"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minlength": 10
+      },
+      "url": {
+        "type": "string"
+      },
+      "customDetails": {
+        "type": "object",
+        "properties": {
+          "ociRepositories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        }
+      },
+      "type": {
+        "type": "string",
+        "enum": ["OCI", "Helm"],
+        "default": "Helm"
+      },
+      "auth": {
+        "type": "object",
+        "properties": {
+          "authType": {
+            "type": "string",
+            "enum": ["None", "Basic", "Bearer", "Docker", "CustomHeader"],
+            "default": "Basic"
+          }
+        }
+      }
+    },
+    "definitions": {
+      "basicAuth": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": ["userName", "password"]
+      },
+      "bearerAuth": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": ["token"]
+      },
+      "dockerCreds": {
+        "type": "object",
+        "properties": {
+          "secretName": {
+            "type": "string"
+          },
+          "server": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": ["token"]
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "authType": {
+                  "const": "Basic"
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "usernamePassword": {
+                  "$ref": "#/definitions/basicAuth"
+                }
+              },
+              "required": ["usernamePassword"]
+            }
+          },
+          "required": ["auth"]
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "authType": {
+                  "const": "Bearer"
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "auth": {
+              "$ref": "#/definitions/bearerAuth"
+            }
+          },
+          "required": ["auth"]
+        }
+      },
+      {
+        "if": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "authType": {
+                  "const": "Docker"
+                }
+              }
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "auth": {
+              "properties": {
+                "dockerCreds": {
+                  "$ref": "#/definitions/dockerCreds"
+                }
+              },
+              "required": ["dockerCreds"]
+            }
+          },
+          "required": ["auth"]
+        }
+      }
+    ]
+  }
+  

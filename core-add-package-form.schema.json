@@ -21,7 +21,8 @@
       "properties": {
         "authType": {
           "type": "string",
-          "enum": ["None", "Basic", "Bearer", "Docker", "CustomHeader"]
+          "enum": ["None", "Basic", "Bearer", "Docker", "CustomHeader"],
+          "default": "Basic"
         }
       }
     }

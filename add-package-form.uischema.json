@@ -1,0 +1,57 @@
+{
+  "ui:order": ["name", "customDetails", "*", "auth"],
+  "customDetails": {
+    "ui:title": "Custom details",
+    "ociRepositories": {
+      "ui:title": "OCI repositories"
+    }
+  },
+  "name": {
+    "ui:autofocus": true,
+    "ui:title": "Name"
+  },
+  "url": {
+    "ui:title": "URL"
+  },
+  "type": {
+    "ui:title": "Repository type",
+    "ui:widget": "select"
+  },
+  "auth": {
+    "ui:title": "Repository authorization",
+    "authType": {
+      "ui:title": "Auth type",
+      "ui:widget": "select"
+    },
+    "usernamePassword": {
+      "ui:title": "Basic authentication",
+      "userName": {
+        "ui:title": "User name"
+      },
+      "password": {
+        "ui:title": "Password"
+      }
+    },
+    "token": {
+      "ui:title": "Bearer token"
+    },
+    "dockerCreds": {
+      "ui:title": "Docker credentials",
+      "secretName": {
+        "ui:title": "Secret name"
+      },
+      "server": {
+        "ui:title": "Server"
+      },
+      "userName": {
+        "ui:title": "User name"
+      },
+      "password": {
+        "ui:title": "Password"
+      },
+      "email": {
+        "ui:title": "E-mail"
+      }
+    }
+  }
+}
